@@ -1,9 +1,13 @@
 import discord
 from discord.ext import commands
 import random
+import time
 
 intents = discord.Intents.default()
 intents.message_content = True
+
+
+    
 
 piedrin = commands.Bot(command_prefix = "/", intents = intents)
 
@@ -22,5 +26,37 @@ async def hola(ctx):
 @piedrin.command()
 async def bonjour(ctx):
     await ctx.send(f"Bonjour, je suis {piedrin.user}!")
+
+@piedrin.command()
+async def sumar(ctx):
+    global a,b,c
+
+    a = random.randint(1,1000)
+    b = random.randint(1,1000)
+    c = a+b
+
+    await ctx.send(f"De acuerdo, es hora de prácticar sumas...")
+    await ctx.send(f"¡Te pondré una suma y pensaras la respuesta rápidamente!")
+    await ctx.send(f"Te daré 5 segundos para pensar, y luego daré la respuesta.")
+
+    await ctx.send(f"------------------------------------------------------------")
+    await ctx.send(f"{a} + {b} = ?")
+    await ctx.send(f"------------------------------------------------------------")
+
+    await ctx.send(f"5")
+    time.sleep(1)
+    await ctx.send(f"4")
+    time.sleep(1)
+    await ctx.send(f"3")
+    time.sleep(1)
+    await ctx.send(f"2")
+    time.sleep(1)
+    await ctx.send(f"1")
+    
+
+    time.sleep(1)
+    await ctx.send(f"------------------------------------------------------------")
+    await ctx.send(f"¡La respuesta era... ¡ {c} !")
+    await ctx.send(f"------------------------------------------------------------")
 
 piedrin.run("token")
