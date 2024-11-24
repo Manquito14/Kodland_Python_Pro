@@ -1,0 +1,74 @@
+import discord
+from discord.ext import commands
+
+import random
+
+permisos = discord.Intents.default()
+permisos.message_content = True
+
+eco = commands.Bot(command_prefix = "/", intents = permisos)
+
+
+@eco.event
+async def on_ready():
+    print(f"{eco.user} está en linea")
+
+@eco.command()
+async def hola(ctx):
+    await ctx.send(f"¡Hola! ¿Como estás? ¡Estoy aquí para ayudarte un poco en el tema ecológico!")
+    await ctx.send(f"Aquí tienes mis comandos")
+    await ctx.send(f"---------------------------------------------------------------------------------")
+    await ctx.send(f"/descomposicion = Te dice una aproximación de lo que tarda en descomponerse los objetos dentro de la lista de datos")
+    await ctx.send(f"/tutorial = Te enseña varios links de video tutoriales de como hacer manualidades con los objetos dentro de la lista de dato.")
+    await ctx.send(f"/consejo = Te brinda consejos ecológicos de forma aleatoria")
+
+@eco.command()
+async def descomposicion(ctx,*,objeto:str):
+    listaDescomposiciones = {
+        "botella de plastico" : 500,
+        "chicle" : 10,
+        "vidrio" : 5000
+    }
+    objeto = objeto.lower()
+    if objeto in listaDescomposiciones:
+        await ctx.send(f"El objeto {objeto} tarda en descomponerse aproximadamente {listaDescomposiciones[objeto]} años") # type: ignore
+    else:
+        await ctx.send(f"No tengo información al respecto de ese objeto.") # type: ignore
+
+@eco.command()
+async def tutorial(ctx,*,objeto:str):
+
+    tutos = {
+        "papel" : "https://youtu.be/Lma76RE1NWQ?si=ViLJk_Sz6hM6jPFc / https://youtu.be/kaPSHFEM1zo?si=WUPIcSXI1edEa6T8 / https://youtu.be/UkA-v1g5hu4?si=TFuOkiRsxxsD3L4S / https://youtu.be/01VPpTmzGt0?si=M3ULizTFWBCuoSTM",
+        "carton" : "https://youtu.be/d_U4Vw3T4r4?si=0-3EtS1jmDSUaLiH / https://youtu.be/smcnElmJodI?si=3Oog6Pw6hFboGNR_",
+        "plastico" : "https://youtu.be/xCaI-5WVRlY?si=rre62ECcZDY1HlNB / https://youtu.be/gT3-n7gYEP0?si=fB78gzXYK8LQ_MJ5 / https://youtu.be/9RztExfFeo8?si=HvJhKuZT7XPGL4CJ"
+    }
+
+    objeto = objeto.lower()
+    if objeto in tutos:
+        await ctx.send(f"Aquí hay enlaces de tutoriales que puedes usar para hacer una manualidad con {objeto}: {tutos[objeto]}")
+    else:
+        await ctx.send(f"Lo lamento no tengo tutoriales sobre un objeto llamado{objeto}")
+
+@eco.command()
+async def consejo(ctx):
+    a = random.randint(1,10)
+
+    consejos = {
+        1 : "Puedes cambiar a bombillas LED, reducir el uso de aire acondicionado y calefacción, y desconectar los aparatos eléctricos cuando no los uses",
+        2 : "Toma duchas cortas, cierra la canilla al cepillarte los dientes, y no dejes que gotee. También puedes recoger el agua de lluvia para regar las plantas",
+        3 : "Evita los productos de un solo uso, como las pajillas, y usa bolsas de tela en lugar de bolsas de plástico",
+        4 : "Consume productos locales y de temporada, esto ayuda a reducir la huella de carbono de los alimentos",
+        5 : "Evita los productos con muchos químicos",
+        6 : "En la escuela/colegio, anima a ofrecer opciones saludables en la cafetería",
+        7 : "Puedes cultivar tus propios vegetales en casa",
+        8 : "Utiliza el transporte público, la bicicleta o caminar para reducir las emisiones de carbono",
+        9 : "Participa en talleres, charlas, visitas a museos o exposiciones sobre medio ambiente",
+        10 : "Disminuye el consumo de productos que no son reciclables o que dañan el medio ambiente"
+    }
+
+    await ctx.send(f"{consejos[a]}")
+
+eco.run("TOKEN")
+
+
