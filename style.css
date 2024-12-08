@@ -1,0 +1,68 @@
+body{
+    background-color: beige;
+
+    animation: cambioColor 3s infinite;
+}
+h1{
+    color: brown;
+    font-family: fantasy;
+    text-align: center;
+}
+h2{
+    color: brown;
+    font-family: fantasy;
+    text-align: center;
+}
+body{
+    text-align: center;
+}
+p{
+    color: brown;
+    font-family: fantasy;
+    text-align: center;
+}
+a{
+    color: brown;
+    text-decoration: none;
+    font-family: fantasy;
+    text-align: center;
+
+    
+}
+label{
+    color: brown;
+    font-family: fantasy;
+}
+form{
+    text-align: center;
+}
+img:hover{
+    animation: blink 2s infinite;
+}
+
+@keyframes cambioColor{
+    0%{
+        background-color: beige;
+    }
+    50%{
+        background-color: khaki;
+    }
+    100%{
+        background-color: beige;
+    }
+}
+
+@keyframes blink{
+    0%{
+        opacity: 1;
+    }
+    45%{
+        opacity: 0;
+    }
+    55%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
