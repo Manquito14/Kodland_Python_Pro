@@ -1,6 +1,7 @@
 # Importar
 from flask import Flask, render_template, request, send_from_directory
 
+easter_egg = "omg"
 
 app = Flask(__name__)
 
